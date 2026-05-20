@@ -1,1 +1,261 @@
 
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Team About Us - Left Sidebar Layout</title>
+    <style>
+        :root {
+            --main-bg: #F0F3F7; 
+            --accent-color: #0fbcf9;
+            --text-dark: #2d3436;
+            --text-gray: #636e72;
+            --bio-card-bg: #FFFFFF; 
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: var(--main-bg);
+            margin: 0;
+            color: var(--text-dark);
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .header {
+            padding: 40px 20px 20px;
+            text-align: center;
+        }
+        .header-title {
+            font-size: 26px;
+            font-weight: 800;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+
+        
+        .main-container {
+            display: flex;
+            max-width: 800px;
+            width: 100%;
+            margin: 0 auto padding;
+            padding: 20px;
+            gap: 40px;
+            box-sizing: border-box;
+            align-items: center;
+            justify-content: center;
+            flex-grow: 1;
+        }
+
+        
+        .team-section {
+            display: flex;
+            flex-direction: column; 
+            gap: 20px;
+        }
+
+        .member {
+            text-align: center;
+            cursor: pointer;
+            position: relative;
+        }
+
+        .img-box img {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 3px solid #fff;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        
+        .member:hover .img-box img {
+            transform: scale(1.1);
+            border-color: #bfa3ff;
+        }
+
+        /* ডিফল্ট একটিভ স্টেট (প্রথম লোডে ৩ নম্বর মেম্বার Jewel Rana হাইলাইট থাকবে) */
+        .initial-active .rank-1 img {
+            border-color: #FFD700;
+            transform: scale(1.15);
+            box-shadow: 0 8px 20px rgba(0,0,0,0.15);
+        }
+
+        
+        .member.active .img-box img {
+            border-color: var(--accent-color) !important;
+            transform: scale(1.2) !important;
+            box-shadow: 0 10px 25px rgba(15, 188, 249, 0.4);
+        }
+
+        
+        .has-active .member:not(.active) img {
+            opacity: 0.6;
+            transform: scale(0.9);
+        }
+
+        
+        .bio-container {
+            flex: 1;
+            max-width: 450px; 
+            width: 100%;
+        }
+
+        .bio-display {
+            background: var(--bio-card-bg);
+            border-radius: 30px; 
+            padding: 35px 30px; 
+            text-align: center;
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.06); 
+            border: 1px solid rgba(0,0,0,0.02);
+            position: relative;
+        }
+
+        
+        .bio-avatar-large {
+            width: 100px;
+            height: 100px;
+            border-radius: 50%;
+            object-fit: cover;
+            margin: 0 auto 20px;
+            display: block;
+            border: 4px solid #fff;
+            box-shadow: 0 8px 20px rgba(0,0,0,0.1);
+        }
+
+        .bio-content {
+            animation: fadeIn 0.5s ease-out forwards;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(15px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .bio-content h2 { 
+            margin: 0 0 8px; 
+            color: var(--text-dark); 
+            font-size: 24px; 
+            font-weight: 700;
+        }
+        
+        .role-badge {
+            display: inline-block;
+            background: #E3F2FD;
+            color: #1976D2;
+            padding: 6px 18px;
+            border-radius: 30px;
+            font-size: 13px;
+            font-weight: 700;
+            margin-bottom: 20px;
+            border: 1px solid #BBDEFB;
+        }
+
+        .bio-content p {
+            font-size: 14px;
+            line-height: 1.7;
+            color: #4A5568;
+            margin: 0;
+            text-align: center;
+        }
+
+        
+        @media (max-width: 600px) {
+            .main-container {
+                flex-direction: column;
+                gap: 30px;
+            }
+            .team-section {
+                flex-direction: row; 
+                justify-content: center;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="header">
+        <div class="header-title">Our Expert Team</div>
+    </div>
+
+    
+    <div class="main-container">
+        
+        <!-- বাম পাশের ৫টি গোল আইকন -->
+        <div class="team-section initial-active" id="teamContainer">
+            <div class="member" onclick="updateBio(this, 4)">
+                <div class="img-box"><img src="https://i.pravatar.cc/150?u=44" alt="Tanvir"></div>
+            </div>
+            <div class="member" onclick="updateBio(this, 2)">
+                <div class="img-box"><img src="https://i.pravatar.cc/150?u=22" alt="Rahim"></div>
+            </div>
+            <!-- Jewel Rana ডিফল্ট একটিভ থাকার জন্য rank-1 ব্যবহার করা হয়েছে -->
+            <div class="member rank-1" onclick="updateBio(this, 1)">
+                <div class="img-box"><img src="https://i.pravatar.cc/150?u=11" alt="Jewel"></div>
+            </div>
+            <div class="member" onclick="updateBio(this, 3)">
+                <div class="img-box"><img src="https://i.pravatar.cc/150?u=33" alt="Sumi"></div>
+            </div>
+            <div class="member" onclick="updateBio(this, 5)">
+                <div class="img-box"><img src="https://i.pravatar.cc/150?u=55" alt="Karim"></div>
+            </div>
+        </div>
+
+        
+        <div class="bio-container">
+            <div class="bio-display">
+                <div class="bio-content" id="bioBox">
+                    
+                    <img src="https://i.pravatar.cc/150?u=11" id="bImg" class="bio-avatar-large" alt="Active Member">
+                    
+                    <h2 id="bName">Jewel Rana</h2>
+                    <div class="role-badge" id="bRole">CEO & Founder</div>
+                    <p id="bDesc">
+                        Jewel Rana একজন দক্ষ Web এবং Android Developer। তিনি এই প্রজেক্টের প্রধান স্থপতি এবং প্রিমিয়াম ইউজার ইন্টারফেস ডিজাইনে পারদর্শী। তিনি প্রজেক্টের টেকনিক্যাল দিকগুলো পরিচালনা করেন।
+                    </p>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <script>
+        // এখানে মেম্বারদের ছবির লিংকসহ ডেটা রাখা হয়েছে
+        const teamData = {
+            1: { name: "Jewel Rana", role: "CEO & Founder", img: "https://i.pravatar.cc/150?u=11", desc: "Jewel Rana একজন দক্ষ Web এবং Android Developer। তিনি এই প্রজেক্টের প্রধান স্থপতি এবং প্রিমিয়াম ইউজার ইন্টারফেস ডিজাইনে পারদর্শী। তিনি প্রজেক্টের টেকনিক্যাল দিকগুলো পরিচালনা করেন।" },
+            2: { name: "Sohel Rana", role: "Software Engineer", img: "https://i.pravatar.cc/150?u=22", desc: "রহিম আমাদের ব্যাকএন্ড সিস্টেমের দায়িত্বে আছেন। তিনি সার্ভার এবং ডাটাবেসের সুরক্ষা ও গতি নিশ্চিত করতে কাজ করেন।" },
+            3: { name: "Sumi Akter", role: "UI/UX Designer", img: "https://i.pravatar.cc/150?u=33", desc: "সুমি আধুনিক এবং ইউজার-ফ্রেন্ডলি ডিজাইন তৈরিতে দক্ষ। অ্যাপের ভিজ্যুয়াল সৌন্দর্য এবং ব্যবহারযোগ্যতা নিশ্চিত করা তার প্রধান কাজ।" },
+            4: { name: "Tanvir Ahmed", role: "Marketing Lead", img: "https://i.pravatar.cc/150?u=44", desc: "তানভীর প্রজেক্টের মার্কেটিং এবং ইউজার ফিডব্যাক নিয়ে কাজ করেন। তিনি প্রজেক্টের বিস্তারে গুরুত্বপূর্ণ ভূমিকা পালন করেন।" },
+            5: { name: "Karim Uddin", role: "Quality Analyst", img: "https://i.pravatar.cc/150?u=55", desc: "করিম অ্যাপের প্রতিটি ফিচার পরীক্ষা করেন যেন কোনো টেকনিক্যাল ত্রুটি না থাকে। তিনি কোয়ালিটি কন্ট্রোল বিশেষজ্ঞ।" }
+        };
+
+        function updateBio(element, id) {
+            const container = document.getElementById('teamContainer');
+            container.classList.remove('initial-active');
+            container.classList.add('has-active');
+
+            
+            document.querySelectorAll('.member').forEach(m => m.classList.remove('active'));
+            element.classList.add('active');
+
+            const data = teamData[id];
+            const bioBox = document.getElementById('bioBox');
+
+            
+            bioBox.style.animation = 'none';
+            bioBox.offsetHeight; 
+            bioBox.style.animation = 'fadeIn 0.5s ease-out forwards';
+
+            // ডেটা আপডেট (ছবি, নাম, রোল এবং বিবরণ)
+            document.getElementById('bImg').src = data.img;
+            document.getElementById('bName').innerText = data.name;
+            document.getElementById('bRole').innerText = data.role;
+            document.getElementById('bDesc').innerText = data.desc;
+        }
+    </script>
+</body>
+</html>
